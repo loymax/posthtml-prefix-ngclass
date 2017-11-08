@@ -68,4 +68,4 @@ npm test
 ```
 
 ## To-Do
-Add support for array syntax
+Add support for condition/function in square brackets

@@ -238,3 +238,40 @@ describe('variable', function() {
       });
   });
 });
+
+describe('array', function() {
+    const html = `<div ng-class="[inputClass, inputClass ? 'row' : '']"></div>`;
+
+    it('empty', function() {
+        return posthtml()
+            .use(posthtmlPrefixNgClass(config.empty))
+            .process(html)
+            .then(({html}) => {
+                expect(html).to.equal(`<div ng-class="[inputClass,inputClass ? 'row' : '']"></div>`);
+            });
+    });
+    it('withPrefix', function() {
+        return posthtml()
+            .use(posthtmlPrefixNgClass(config.withPrefix))
+            .process(html)
+            .then(({html}) => {
+                expect(html).to.equal(`<div ng-class="['prefix-'+inputClass,inputClass ? 'prefix-row' : '']"></div>`);
+            });
+    });
+    it('ignoreIsString', function() {
+        return posthtml()
+            .use(posthtmlPrefixNgClass(config.ignoreIsString))
+            .process(html)
+            .then(({html}) => {
+                expect(html).to.equal(`<div ng-class="['prefix-'+inputClass,inputClass ? 'row' : '']"></div>`);
+            });
+    });
+    it('ignoreIsArray', function() {
+        return posthtml()
+            .use(posthtmlPrefixNgClass(config.ignoreIsArray))
+            .process(html)
+            .then(({html}) => {
+                expect(html).to.equal(`<div ng-class="['prefix-'+inputClass,inputClass ? 'row' : '']"></div>`);
+            });
+    });
+});

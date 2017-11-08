@@ -20,6 +20,10 @@ module.exports = function (options) {
         return expression.charAt(0) === "{" && expression.charAt(expression.length - 1) === "}";
     }
 
+    function isArray(expression) {
+        return expression.charAt(0) === "[" && expression.charAt(expression.length - 1) === "]";
+    }
+
     function isTernary(expression) {
         if (expression.indexOf("?") === -1) {
             return false;
@@ -47,6 +51,18 @@ module.exports = function (options) {
                 return setPrefixForTernary(item);
             } else if (isKeyValue(item)) {
                 return setPrefixForKeyValue(item);
+            }
+
+            return setPrefixForExpression(item);
+        }).join(",");
+    }
+
+    function setPrefixForArray(expression) {
+        return expression.split(",").map((item) => {
+            item = item.trim();
+
+            if (isTernary(item)) {
+                return setPrefixForTernary(item);
             }
 
             return setPrefixForExpression(item);
@@ -98,6 +114,9 @@ module.exports = function (options) {
         if (isObject(ngClass)) {
             ngClass = ngClass.slice(1,-1);
             newNgClass += "{" + setPrefixForObject(ngClass) + "}";
+        } else if (isArray(ngClass)) {
+            ngClass = ngClass.slice(1,-1);
+            newNgClass += "[" + setPrefixForArray(ngClass) + "]";
         } else if (isTernary(ngClass)) {
             newNgClass += setPrefixForTernary(ngClass);
         } else if (isKeyValue(ngClass)) {

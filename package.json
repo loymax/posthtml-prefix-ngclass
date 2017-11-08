@@ -1,6 +1,6 @@
 {
   "name": "posthtml-prefix-ngclass",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "PostHTML plugin to prefix ng-class names",
   "main": "index.js",
   "directories": {

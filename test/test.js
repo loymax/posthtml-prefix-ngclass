@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 const posthtml = require('posthtml');
-const posthtmlPrefixNgClass = require('../index');
+const posthtmlPrefixNgClass = require('../dist/posthtml-prefix-ngclass.backend');
 
 const config = {
     empty: {},

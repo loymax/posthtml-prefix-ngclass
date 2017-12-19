@@ -8,6 +8,10 @@
 npm install --save-dev posthtml-prefix-ngclass
 ```
 
+## Demo
+
+[https://loymax.github.io/posthtml-prefix-ngclass/](https://loymax.github.io/posthtml-prefix-ngclass/)
+
 ## Usage
 
 ```js
